@@ -10,13 +10,20 @@ require('dotenv').config()
 const DB_CONNECTION = process.env.DB_CONNECTION || ''
 mongoose.connect(DB_CONNECTION) // Creo la cadena de conexion
 
-
+// Agregamos la configuracion del cors
+const cors = require('cors')
+app.use(cors());
 
 // Importamos las rutas del otro archivo
 app.use(express.urlencoded({extended: true})) // Acceder a la informacion de las urls
 app.use(express.json()) // analizar informacion en el formato json
+
 const UserRoutes = require('./Routes/UserRoutes')
 app.use('/', UserRoutes)
+
+const carroRoutes = require('./Routes/carroRoutes')
+app.use('/', carroRoutes)
+
 
 
 // Creando el servicio web

@@ -12,7 +12,13 @@ const UserSchema = new mongoose.Schema({
     correo: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function(correo){
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+            },
+            message: props => props.value + "No es un correo electronico Valido"
+        }
     },
     password: {
         type: String,
